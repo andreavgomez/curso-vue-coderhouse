@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" href="./styles/style.css" />
+
+    <title>Vue.JS</title>
+</head>
+
+<body>
+    <div id="app">
+        <header :style="cssHeader" align="center">
+            <h1>{{titulo}}</h1>
+        </header>
+        <main>
+            
+            <h2 align="center">Directivas condicionales</h2>
+            
+            <div v-show="mostrarMensaje" align="center">
+                <p>Bienvenido a la clase de hoy !!!</p>
+            </div>
+
+            <div align="center">
+            <button align="center" v-on:click="showMensaje" value="Click" >Click</button>
+            </div>
+
+            <!-- <div v-for="(data,i) of info">
+                <p>{{data.name}}</p>
+
+            </div> -->
+
+            <container :class="padd-marg">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Id</th>
+                      <th scope="col">img</th>
+                      <th scope="col">name</th>
+                      <th scope="col">phone</th>
+                      <th scope="col">email</th>
+                      <th scope="col">country</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="(data,i) of info" :class="(i%2) == 0 ? 'bg-gris' : null">
+                      <th>{{i +1}}</th>
+                      <td><img :src="data.img" alt="falta imagen" /></td>
+                      <td>{{ data.name}}</td>
+                      <td>{{ data.phone }}</td>
+                      <td>{{ data.email }}</td>
+                      <td>{{ data.country }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+                </container>
+              </div>
+           
+        </main>
+    </div>
+    <script src="./data.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="./app.js"></script>
+</body>
+
+</html>
