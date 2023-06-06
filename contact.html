@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact</title>
+</head>
+<body>
+    <div id="app">  
+        <header :style="cssHeader" align="center">
+            <h1>{{tituloHeader}}</h1>
+        </header>        
+        <header-component :titulo="'Contactese con nosotros'"></header-component>
+        <card-component-contact :contacto="contacto" :telefono="telefono" :email="email"></card-component-contact>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="./app.js"></script>
+</body>
+
+</html>

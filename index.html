@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style/style.css">
+    <title>Desafio - Componentes</title>
+</head>
+<body>
+    <div id="app">
+        <header :style="cssHeader" align="center">
+            <h1>{{tituloHeader}}</h1>
+        </header>        
+        <header-component :titulo="'Listado de libros'" :style="cssHeader" align="center"></header-component>
+        <!-- <h2 align="center">Listado de libros</h2> -->
+        <card-component :titulo="titulo" :portada="portada" :precio="precio" :style="cssCard"></card-component>
+        <main-cards v-for="(libros, index) of codermeals"
+                    :titulo="libros.titulo"
+                    :portada="libros.portada"
+                    :precio="libros.precio" :style="cssCard">
+        </main-cards>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="./app.js"></script>
+</body>
+
+</html>
