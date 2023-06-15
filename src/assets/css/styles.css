@@ -1,0 +1,38 @@
+#app {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+    background-color: #222222;
+}
+
+.containerFooter {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+    justify-content: space-around;
+    padding: 1em;
+    background-color:#004983
+}
+
+.btn {
+    background:  #004983;
+}
+
+.btn:hover {
+    background-color:#3483fa;
+}
+
+.btn:active {
+    background-color: #1580e4;
+}
+
+a {
+    color: white;
+}
+
+a:hover {
+    color: red;
+}
