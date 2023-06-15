@@ -1,7 +1,5 @@
 ## curso-vuejs-coderhouse
 
-# 1er Proyecto Final - Bottino
-
 Primer entrega de proyecto final del curso.
 
 ### Objetivos Generales:
