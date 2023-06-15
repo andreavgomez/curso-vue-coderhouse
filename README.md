@@ -1,8 +1,6 @@
-## curso-vuejs-coderhouse
+## Primer entrega
 
-Primer entrega de proyecto final del curso.
-
-### Objetivos Generales:
+### Objetivos:
 
 1. Crea el primer approach de lo que será tu proyecto final
 2. Deberá estar formateado con el framework Bootstrap
