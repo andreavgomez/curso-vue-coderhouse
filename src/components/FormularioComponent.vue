@@ -82,6 +82,20 @@ export default {
       },
     };
   },
+  // methods: {
+  //   onSubmit() {
+  //     // ...validaciones y acciones del formulario...
+
+  //     if (this.formstate.$valid) {
+  //       // Realizar acciones si el formulario es válido
+  //       this.$emit("submitForm", this.model);
+  //       this.formstate.$reset();
+  //     }
+  //   },
+  //   resetForm() {
+  //     this.formstate.$resetFields();
+  //   },
+  // },
   methods: {
     onSubmit() {
       // ...validaciones y acciones del formulario...
@@ -89,12 +103,18 @@ export default {
       if (this.formstate.$valid) {
         // Realizar acciones si el formulario es válido
         this.$emit("submitForm", this.model);
-        this.formstate.$reset();
+        this.resetForm(); // Llamar al método para restablecer el formulario
       }
     },
     resetForm() {
-      this.formstate.$resetFields();
+      this.model = {
+        apeNom: "",
+        edad: 0,
+        sexo: "",
+        email: "",
+      };
+      this.formstate.$reset(); // Restablecer el estado del formulario
     },
-  },
+  },  
 };
 </script>

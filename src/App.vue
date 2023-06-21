@@ -26,7 +26,12 @@ export default {
   methods: {
     agregarDato(nuevoDato) {
       this.datos.push(nuevoDato);
-    },
+      this.$refs.formulario.resetForm(); // Llamar al método para restablecer el formulario desde el componente hijo
+     },
+  // methods: {
+  //   agregarDato(nuevoDato) {
+  //     this.datos.push(nuevoDato);
+  //   },
     limpiarTabla() {
       this.datos = [];
     },
