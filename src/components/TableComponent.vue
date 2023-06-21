@@ -10,7 +10,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(data, i) in info" :key="i">
+          <tr v-for="(data, i) in datos" :key="i">
             <td>{{ data.apeNom }}</td>
             <td>{{ data.edad }}</td>
             <td>{{ data.sexo }}</td>
@@ -23,25 +23,36 @@
 
 <script>
 export default {
-  name: "TableComponent",
+  name: 'TablaComponent',
   props: {
-      info: {
+    datos: {
       type: Array,
       required: true,
     },
-  },
-//   data() {
-//     return {
-//       formstate: {},
-//       model: {
-//         apeNom: "",
-//         edad: 0,
-//         sexo: "",
-//         email: "",
-//       },
-//     };
-//   },
+  },				   
 };
 </script>
+// <script>
+// export default {
+//   name: "TableComponent",
+//   props: {
+//       info: {
+//       type: Array,
+//       required: true,
+//     },
+//   },
+//           data() {
+//             return {
+//               formstate: {},
+//               model: {
+//                 apeNom: "",
+//                 edad: 0,
+//                 sexo: "",
+//                 email: "",
+//               },
+//             };
+//           },
+// };
+// </script>
 
 

@@ -1,8 +1,10 @@
 <template>
   <div id="app">
-    <h1>Formulario Vue-Cli</h1>    
-    <FormularioComponent @submitForm="agregarInfo" />
-    <TableComponent :info="info"/>
+    <h2>FormularioVUE cli:</h2>    
+    <FormularioComponent @submitForm="agregarDato" />
+    <h2>Datos ingresados:</h2>
+    <TableComponent :datos="datos"/>
+    <button @click="limpiarTabla">Limpiar tabla</button>
   </div>
 </template>
 
@@ -19,16 +21,17 @@ export default {
   },
   data() {
     return {
-      info: [],
-      // headers: ["name", "surname", "email", "document", "extra", "actions"],
+      datos: [],
     };
   },  
   methods: {
-    agregarInfo(formstate) {
-      this.info.push(formstate);
-      console.log(this.info.value);
-    },  
-  }
+    agregarDato(nuevoDato) {
+      this.datos.push(nuevoDato);
+    },
+    limpiarTabla() {
+      this.datos = [];
+    },
+  },
 }
 </script>
 
@@ -40,5 +43,10 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+
+  .container {
+  max-width: 600px;
+  margin: 0 auto;
+}
 }
 </style>

@@ -145,7 +145,18 @@ export default {
         return;
       }
 
-     this.$emit("submitForm", this.formstate);         
+     this.$emit("submitForm", this.formstate);     
+     
+      // Realizar acciones si el formulario es válido
+      // this.$emit('formulario-completado', this.model);
+      // this.model = {
+      //   apeNom: '',
+      //   edad: '',
+      //   sexo: '',
+      //   email: '',
+      // };
+      // this.formstate.$reset();
+
     },
   },
 };
