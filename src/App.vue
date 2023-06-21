@@ -1,19 +1,33 @@
 <template>
   <div id="app">
-    <FormularioComponent />
-    <TableComponent />
+    <h1>Formulario Vue-Cli</h1>    
+    <FormularioComponent @submitForm="agregarInfo" />
+    <TableComponent :info="info"/>
   </div>
 </template>
 
 <script>
-import FormularioComponent from './components/FormularioComponent.vue'
-import TableComponent from './components/TableComponent.vue'
+import FormularioComponent from './components/FormularioComponent.vue';
+import TableComponent from './components/TableComponent.vue';
+
 
 export default {
   name: 'App',
   components: {
     FormularioComponent,
-    TableComponent
+    TableComponent,
+  },
+  data() {
+    return {
+      info: [],
+      // headers: ["name", "surname", "email", "document", "extra", "actions"],
+    };
+  },  
+  methods: {
+    agregarInfo(formstate) {
+      this.info.push(formstate);
+      console.log(this.info.value);
+    },  
   }
 }
 </script>

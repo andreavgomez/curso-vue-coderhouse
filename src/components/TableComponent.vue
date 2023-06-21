@@ -1,6 +1,5 @@
 <template>
   <div>
-    <container>
       <table class="table">
         <thead>
           <tr>
@@ -11,7 +10,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(data, i) of info" :key="i">
+          <tr v-for="(data, i) in info" :key="i">
             <td>{{ data.apeNom }}</td>
             <td>{{ data.edad }}</td>
             <td>{{ data.sexo }}</td>
@@ -19,9 +18,9 @@
           </tr>
         </tbody>
       </table>
-    </container>
   </div>
 </template>
+
 <script>
 export default {
   name: "TableComponent",
@@ -31,17 +30,17 @@ export default {
       required: true,
     },
   },
-  data() {
-    return {
-      formstate: {},
-      model: {
-        apeNom: "",
-        edad: 0,
-        sexo: "",
-        email: "",
-      },
-    };
-  },
+//   data() {
+//     return {
+//       formstate: {},
+//       model: {
+//         apeNom: "",
+//         edad: 0,
+//         sexo: "",
+//         email: "",
+//       },
+//     };
+//   },
 };
 </script>
 

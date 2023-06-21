@@ -140,18 +140,12 @@ export default {
         alert("La sexo es obligatorio");
       }
       if (this.formstate.$valid) {
-        console.log(this.formstate);
+        // console.log(this.formstate);
         alert("Formulario enviado con exito");
         return;
       }
 
-     this.$emit("submitForm", this.formstate);      
-     this.formstate = {
-        apeNom: "",
-        edad: 0,
-        sexo: "",
-        email: "",
-      };     
+     this.$emit("submitForm", this.formstate);         
     },
   },
 };
