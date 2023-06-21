@@ -57,50 +57,78 @@
         </field-messages>
       </validate>
       <validate tag="label">
-         <span>Edad: </span>
-         <input type="number" v-model.number="edad" id="edad" />
-         <field-messages name="edad" show="$touched">
+        <span>Edad: </span>
+        <input type="number" v-model.number="model.edad" id="edad" />
+        <field-messages name="edad" show="$touched">
           <div slot="required">Ingrese su edad</div>
         </field-messages>
       </validate>
 
-      <validate tag="label">      
-       <div>
-        <h4>Sexo:</h4>
+      <validate tag="label">
         <div>
-          <label for="documentDNI">Femenino</label>
-          <input
-            type="radio"
-            name="genero"
-            id="sexoFem"
-            v-model.number="sexo"
-            value="femenino"
-          />
+          <h4>Sexo:</h4>
+          <div>
+            <label for="documentDNI">Femenino</label>
+            <input
+              type="radio"
+              name="genero"
+              id="sexoFem"
+              v-model.number="model.sexo"
+              value="femenino"
+            />
+          </div>
+          <div>
+            <label for="sexoMasc">Masculino</label>
+            <input
+              type="radio"
+              name="genero"
+              id="sexoMasc"
+              v-model.number="model.sexo"
+              value="masculino"
+            />
+          </div>
+          <div>
+            <label for="sexoNeutro">Neutro</label>
+            <input
+              type="radio"
+              name="genero"
+              id="sexoNeutro"
+              v-model.number="model.sexo"
+              value="neutro"
+            />
+          </div>
         </div>
-        <div>
-          <label for="sexoMasc">Masculino</label>
-          <input
-            type="radio"
-            name="genero"
-            id="sexoMasc"
-            v-model.number="sexo"
-            value="masculino"
-          />
-        </div>
-        <div>
-          <label for="sexoNeutro">Neutro</label>
-          <input
-            type="radio"
-            name="genero"
-            id="sexoNeutro"
-            v-model.number="sexo"
-            value="neutro"
-          />
-        </div>
-      </div>      
-      </validate> 
+      </validate>
+
+      <!-- <validate tag="label">
+        <span>Email*</span>
+        <input type="email" v-model="model.email" name="email" required />
+        <field-messages name="email" show="$touched">
+          <div slot="required">El email es requerido</div>
+          <div slot="email">El email no es válido</div>
+        </field-messages>
+      </validate>
+
+      <validate tag="label" :custom="{ 'check-password': checkPassword }">
+        <span>Password*</span>
+        <input
+          type="password"
+          v-model="model.password"
+          name="password"
+          required
+        />
+        <field-messages name="password" show="$touched">
+          <div slot="required">El password es requerido</div>
+          <div slot="check-password">
+            El password debe tener al menos 8 caracteres, una mayúscula, una
+            minúscula, un número y un carácter especial
+          </div>
+        </field-messages>
+      </validate> -->
+
       <button type="submit">Enviar</button>
     </vue-form>
+    <!-- <pre>{{ formstate }}</pre> -->
   </div>
 </template>
 
@@ -116,28 +144,26 @@ export default {
       model: {
         apeNom: "",
         edad: 0,
-        sexo:"",
+        sexo: "",
       },
     };
   },
   methods: {
     onSubmit() {
-      if (this.name ===""){
+      if (this.model.apeNom === "") {
         alert("El apellido y Nombre es obligatorio");
       }
-      if (this.edad <= 0){
+      if (this.model.edad <= 0) {
         alert("La Edad es obligatorio");
+      }
+      if (this.model.sexo === "") {
+        alert("La sexo es obligatorio");
       }
       if (this.formstate.$valid) {
         console.log(this.formstate);
         alert("Formulario enviado con exito");
         return;
       }
-    },
-    checkPassword(value) {
-      return /(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/.test(
-        value
-      );
     },
   },
 };
