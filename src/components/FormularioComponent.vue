@@ -1,52 +1,4 @@
 <template>
-  <!-- <form @submit.prevent="submitHandler">
-    <div>
-      <div>
-        <label for="nombreApe">Nombre y Apellido: </label>
-        <input type="text" v-model.trim="nombreApe" id="nombreApe" />
-      </div>
-      <div>
-        <label for="edad">Edad: </label>
-        <input type="number" v-model.number="edad" id="edad" />
-      </div>
-      <div>
-        <h4>Sexo:</h4>
-        <div>
-          <label for="documentDNI">Femenino</label>
-          <input
-            type="radio"
-            name="genero"
-            id="sexoFem"
-            v-model="sexo"
-            value="femenino"
-          />
-        </div>
-        <div>
-          <label for="sexoMasc">Masculino</label>
-          <input
-            type="radio"
-            name="genero"
-            id="sexoMasc"
-            v-model="sexo"
-            value="masculino"
-          />
-        </div>
-        <div>
-          <label for="sexoNeutro">Neutro</label>
-          <input
-            type="radio"
-            name="genero"
-            id="sexoNeutro"
-            v-model="sexo"
-            value="neutro"
-          />
-        </div>
-      </div>
-      <div>
-        <button>Enviar</button>
-      </div>
-    </div>
-  </form> -->
   <div>
     <vue-form :state="formstate" @submit.prevent="onSubmit">
       <validate tag="label">
@@ -110,9 +62,11 @@
       </validate>
 
       <button type="submit">Enviar</button>
+      <!-- <button type="button" @click="resetForm">Restablecer</button> -->
     </vue-form>
   </div>
 </template>
+
 
 <script>
 export default {
@@ -130,33 +84,16 @@ export default {
   },
   methods: {
     onSubmit() {
-      if (this.model.apeNom === "") {
-        alert("El apellido y Nombre es obligatorio");
-      }
-      if (this.model.edad <= 0) {
-        alert("La Edad es obligatorio");
-      }
-      if (this.model.sexo === "") {
-        alert("La sexo es obligatorio");
-      }
+      // ...validaciones y acciones del formulario...
+
       if (this.formstate.$valid) {
-        // console.log(this.formstate);
-        alert("Formulario enviado con exito");
-        return;
+        // Realizar acciones si el formulario es válido
+        this.$emit("submitForm", this.model);
+        this.formstate.$reset();
       }
-
-     this.$emit("submitForm", this.formstate);     
-     
-      // Realizar acciones si el formulario es válido
-      // this.$emit('formulario-completado', this.model);
-      // this.model = {
-      //   apeNom: '',
-      //   edad: '',
-      //   sexo: '',
-      //   email: '',
-      // };
-      // this.formstate.$reset();
-
+    },
+    resetForm() {
+      this.formstate.$resetFields();
     },
   },
 };
