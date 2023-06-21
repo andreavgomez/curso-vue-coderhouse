@@ -1,16 +1,19 @@
 <template>
   <div id="app">
     <FormularioComponent />
+    <TableComponent />
   </div>
 </template>
 
 <script>
 import FormularioComponent from './components/FormularioComponent.vue'
+import TableComponent from './components/TableComponent.vue'
 
 export default {
   name: 'App',
   components: {
-    FormularioComponent
+    FormularioComponent,
+    TableComponent
   }
 }
 </script>

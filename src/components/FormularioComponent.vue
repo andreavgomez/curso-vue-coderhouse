@@ -100,8 +100,8 @@
         </div>
       </validate>
 
-      <!-- <validate tag="label">
-        <span>Email*</span>
+      <validate tag="label">
+        <span>Email: </span>
         <input type="email" v-model="model.email" name="email" required />
         <field-messages name="email" show="$touched">
           <div slot="required">El email es requerido</div>
@@ -109,26 +109,8 @@
         </field-messages>
       </validate>
 
-      <validate tag="label" :custom="{ 'check-password': checkPassword }">
-        <span>Password*</span>
-        <input
-          type="password"
-          v-model="model.password"
-          name="password"
-          required
-        />
-        <field-messages name="password" show="$touched">
-          <div slot="required">El password es requerido</div>
-          <div slot="check-password">
-            El password debe tener al menos 8 caracteres, una mayúscula, una
-            minúscula, un número y un carácter especial
-          </div>
-        </field-messages>
-      </validate> -->
-
       <button type="submit">Enviar</button>
     </vue-form>
-    <!-- <pre>{{ formstate }}</pre> -->
   </div>
 </template>
 
@@ -137,14 +119,12 @@ export default {
   name: "FormularioComponent",
   data() {
     return {
-      // nombreApe: "",
-      // edad: 0,
-      // sexo: "",
       formstate: {},
       model: {
         apeNom: "",
         edad: 0,
         sexo: "",
+        email: "",
       },
     };
   },
@@ -164,6 +144,14 @@ export default {
         alert("Formulario enviado con exito");
         return;
       }
+
+     this.$emit("submitForm", this.formstate);      
+     this.formstate = {
+        apeNom: "",
+        edad: 0,
+        sexo: "",
+        email: "",
+      };     
     },
   },
 };
