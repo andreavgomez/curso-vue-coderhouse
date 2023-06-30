@@ -1,14 +1,13 @@
-import './assets/main.css'
-import { createApp } from 'vue'
-//import { createPinia } from 'pinia'
+import Vue from 'vue'
 import App from './App.vue'
-import router from './router'
+import router from "./router"
 import 'bootstrap/dist/css/bootstrap.min.css'
 import "bootstrap"
-import 'bootstrap-icons/font/bootstrap-icons.css' 
+import 'bootstrap-icons/font/bootstrap-icons.css'
 
-const app = createApp(App)
+Vue.config.productionTip = false
 
-//app.use(createPinia())
-app.use(router)
-app.mount('#app')
+new Vue({
+  router,
+  render: h => h(App),
+}).$mount('#app')
