@@ -59,8 +59,11 @@
 
 <style>
     .bi-size {
-        font-size: 30px; /* Ajusta el tamaño del icono según tus necesidades */
+        font-size: 30px; 
         width: 2rem;
         
+    }
+  .nav-item {
+        padding: 5px;
     }
 </style>
