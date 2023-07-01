@@ -1,19 +1,19 @@
 <template>
   <div id="app">
     <NavbarComponent/>
-    <!-- <HeaderBar /> -->
+    <HeaderBar />
     <router-view />
   </div>
 </template>
 
 <script>
-// import HeaderBar from './components/HeaderBar.vue'
+import HeaderBar from './components/HeaderBar.vue'
 import NavbarComponent from './components/NavbarComponent.vue'
 
 export default {
   name: 'App',
   components: {
-    // HeaderBar,
+    HeaderBar,
     NavbarComponent
   }
 }
