@@ -10,7 +10,8 @@
             <h4 class="card-title">{{libro.titulo}}</h4>
             <p>Autor: {{libro.autor}}</p>
             <p>Precio: ${{libro.precio}}</p>
-            <button id="" class="btn btn-outline-success">Agregar al carrito</button>
+            <button class="btn btn-outline-success" @click="agregarAlCarrito(libro)">Agregar al carrito</button>      
+            <CarritoComponent :carrito="carrito" />
           </div>
         </div>
       </div>
@@ -26,12 +27,17 @@ export default {
       loading: false,
     //   users: [],
       libros: [],
+      carrito: [],
     };
   },
   created() {
     this.getLibros();
   },
   methods: {
+    agregarAlCarrito(libro) {
+      this.carrito.push(libro); 
+      this.$emit('agregar-al-carrito', libro);
+    },
     getLibros() {
       this.loading = true;
       fetch("https://649e5806245f077f3e9c4bc1.mockapi.io/libros")
