@@ -11,17 +11,22 @@
             <p>Autor: {{libro.autor}}</p>
             <p>Precio: ${{libro.precio}}</p>
             <button class="btn btn-outline-success" @click="agregarAlCarrito(libro)">Agregar al carrito</button>      
-            <CarritoComponent :carrito="carrito" />
           </div>
         </div>
       </div>
     </div>
+    <CarritoComponent :carrito="carrito" />
   </div>
 </template>
 
 <script>
+import CarritoComponent from "../components/CarritoComponent.vue"; 
+
 export default {
   name: "HomePage",
+  components: {
+    CarritoComponent, 
+  },
   data() {
     return {
       loading: false,
@@ -35,8 +40,9 @@ export default {
   },
   methods: {
     agregarAlCarrito(libro) {
+      libro.cantidad=1
       this.carrito.push(libro); 
-      this.$emit('agregar-al-carrito', libro);
+      this.$emit("agregarAlCarrito", libro);
     },
     getLibros() {
       this.loading = true;
