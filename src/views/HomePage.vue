@@ -6,11 +6,12 @@
         <div :id="libro.id" class="card" style="width: 18rem;">
           <img class="card-img-top img-fluid" style="height: 200px;" src="../assets/libroNuevo.jpg" :alt="libro.titulo">
           <!-- <img class="card-img-top img-fluid" style="height: 200px;" :src="libro.imagen" :alt="libro.titulo">           -->
+          <!-- <img class="card-img-top img-fluid" style="height: 200px;" src={{libro.imagen}} :alt="libro.titulo">           -->
           <div class="card-body">
             <h4 class="card-title">{{libro.titulo}}</h4>
             <p>Autor: {{libro.autor}}</p>
             <p>Precio: ${{libro.precio}}</p>
-            <button class="btn btn-outline-success" @click="agregarAlCarrito(libro)">Agregar al carrito</button>      
+            <button class="btn btn-primary" @click="agregarAlCarrito(libro)"><i class="bi bi-cart bi-size"></i></button>      
           </div>
         </div>
       </div>

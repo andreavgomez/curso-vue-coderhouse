@@ -3,7 +3,7 @@
     <!-- Navigation -->
     <nav class="navbar shadow bg-white rounded justify-content-between flex-nowrap flex-row fixed-top">
       <div class="container">
-        <a class="navbar-brand float-left" href="/" target="_blank">
+        <a class="navbar-brand float-left" href="/">
         <!-- <a class="navbar-brand float-left" href="https://www.google.com" target="_blank"> -->
         <!-- <router-link to="/">Home</router-link> -->
           Libreria El arte de Leer
@@ -12,7 +12,7 @@
           <li class="nav-item">
             <!-- <router-link class="btn btn-outline-primary" v-if="!authenticated" to="/login">Ingresar</router-link> -->
             <!-- <router-link class="btn btn-outline-primary" to="/login">Ingresar</router-link> -->
-            <a href="/login" target="_blank"><i class="bi bi-person-circle bi-size"></i></a>
+            <a href="/login"><i class="bi bi-person-circle bi-size"></i></a>
             
           </li>
           <li class="nav-item">
@@ -26,7 +26,7 @@
           </li>
           <li class="nav-item">
             <!-- <router-link class="btn btn-outline-primary" to="/carrito">carrito</router-link> -->        
-            <a href="/carrito" target="_blank"><i class="bi bi-cart bi-size"></i></a>
+            <a href="/carrito" ><i class="bi bi-cart bi-size"></i></a>
           </li>          
         </ul>
       </div>

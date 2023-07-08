@@ -18,18 +18,33 @@
           <td>$ {{ libro.precio }}</td>
           <td class="qty-col">
             <div class="flex-space">
-              <button class="button-small mr-05 ml-05" style="cursor: pointer;" @click="decrementar(libro)">➖️</button>
-              <span>{{libro.cantidad}}</span>
+              <button
+                class="button-small mr-05 ml-05"
+                style="cursor: pointer"
+                @click="decrementar(libro)"
+              >
+              <i class="bi bi-dash-square"></i>
+              </button>
+              <span>{{ libro.cantidad }}</span>
               <!-- <span>{{ obtenerCantidad(libro) }}</span> -->
-              <button class="button-small ml-05" style="cursor: pointer;" @click="incrementar(libro)">➕️</button>
+              <button
+                class="button-small ml-05"
+                style="cursor: pointer"
+                @click="incrementar(libro)"
+              >
+              <i class="bi bi-plus-square"></i>
+              </button>
             </div>
           </td>
-          <td class="total-col">$ {{ libro.precio }}</td>
-          <td class="trash-btn">  
-            <svg class="icon-pointer" width="1.8em" height="1.8em" viewBox="0 -2 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g id="Interface / Trash_Full">
-            <path id="Vector" d="M14 10V17M10 10V17M6 6V17.8C6 18.9201 6 19.4798 6.21799 19.9076C6.40973 20.2839 6.71547 20.5905 7.0918 20.7822C7.5192 21 8.07899 21 9.19691 21H14.8031C15.921 21 16.48 21 16.9074 20.7822C17.2837 20.5905 17.5905 20.2839 17.7822 19.9076C18 19.4802 18 18.921 18 17.8031V6M6 6H8M6 6H4M8 6H16M8 6C8 5.06812 8 4.60241 8.15224 4.23486C8.35523 3.74481 8.74432 3.35523 9.23438 3.15224C9.60192 3 10.0681 3 11 3H13C13.9319 3 14.3978 3 14.7654 3.15224C15.2554 3.35523 15.6447 3.74481 15.8477 4.23486C15.9999 4.6024 16 5.06812 16 6M16 6H18M18 6H20" stroke="crimson" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            </path></g></svg>
+          <td class="total-col">$ {{ libroTotal(libro) }}</td>       
+          <td class="trash-btn">   
+          <button
+            class="button-small ml-05"
+            style="cursor: pointer"
+            @click="eliminarLibro(libro)"
+          >
+          <i class="bi bi-trash"></i>
+          </button>       
           </td>
         </tr>
       </tbody>
@@ -60,18 +75,42 @@ export default {
   },
   methods: {
     incrementar(libro) {
-        // this.numero += 1 
-        libro.cantidad += 1 
+      console.log("incrementar libro")
+      const libroEnCarrito = this.carrito.find((l) => l.id === libro.id);
+      console.log(libroEnCarrito)
+      console.log(libroEnCarrito.cantidad)
+      if (libroEnCarrito) {
+        this.$set(libroEnCarrito, 'cantidad', libroEnCarrito.cantidad + 1);
+      }
+      console.log(libroEnCarrito.cantidad)
     },
     decrementar(libro) {
-        // this.numero -= 1 
-        libro.cantidad -= 1 
-    }
+      console.log("decrementar libro")
+      const libroEnCarrito = this.carrito.find((l) => l.id === libro.id);
+      console.log(libroEnCarrito)     
+      console.log(libroEnCarrito.cantidad) 
+      if (libroEnCarrito && libroEnCarrito.cantidad > 1) {
+        this.$set(libroEnCarrito, 'cantidad', libroEnCarrito.cantidad - 1);
+        console.log(libroEnCarrito.cantidad)        
+      }
+    },
+    libroTotal(libro) {
+      return libro.precio * libro.cantidad;
+    },
+    eliminarLibro(libro) {
+      console.log("eliminar libro")
+      const nuevoCarrito = this.carrito.filter((l) => l.id !== libro.id);
+      console.log(nuevoCarrito)      
+      this.$emit("update:carrito", nuevoCarrito); // Emitir evento para actualizar la propiedad carrito en el componente padre
+    },
   },
   computed: {
     total() {
       if (this.carrito) {
-        return this.carrito.reduce((total, libro) => total + libro.precio, 0);
+        return this.carrito.reduce(
+          (total, libro) => total + libro.precio * libro.cantidad,
+          0
+        );
       } else {
         return 0;
       }
