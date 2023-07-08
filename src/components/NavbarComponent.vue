@@ -11,8 +11,8 @@
         <ul class="nav navbar-nav flex-row float-right inline-block">
           <li class="nav-item">
             <!-- <router-link class="btn btn-outline-primary" v-if="!authenticated" to="/login">Ingresar</router-link> -->
-            <!-- <router-link class="btn btn-outline-primary" to="/login">Ingresar</router-link> -->
-            <a href="/login"><i class="bi bi-person-circle bi-size"></i></a>
+            <router-link class="btn btn-outline-primary" to="/login"><i class="bi bi-person-circle bi-size"></i></router-link>
+            <!-- <a href="/login"><i class="bi bi-person-circle bi-size"></i></a> -->
             
           </li>
           <li class="nav-item">
@@ -25,8 +25,9 @@
             <router-link class="btn btn-outline-primary" to="/signup">Registrarse</router-link>
           </li>
           <li class="nav-item">
-            <!-- <router-link class="btn btn-outline-primary" to="/carrito">carrito</router-link> -->        
-            <a href="/carrito" ><i class="bi bi-cart bi-size"></i></a>
+            <!-- <router-link class="btn btn-outline-primary" to="/carrito">carrito</router-link> -->                    
+            <!-- <a href="/carrito" ><i class="bi bi-cart bi-size"></i></a> -->
+            <router-link class="btn btn-outline-primary" to="/carrito"><i class="bi bi-cart bi-size"></i></router-link>                    
           </li>          
         </ul>
       </div>

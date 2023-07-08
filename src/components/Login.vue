@@ -33,6 +33,7 @@
  
 <script>
 export default {
+    name: "LoginComponent",
     data() {
         return {
             input: {
@@ -45,23 +46,23 @@ export default {
             variable:"valor"
         }
     },
-    methods: {
-        login() {
-            if (this.input.username != "" && this.input.password != "") {
-                if (this.input.username == this.mockUsuario.username && this.input.password == this.mockUsuario.password) {
-                    this.$emit("authenticated", true);
-                    // Indicando el primer componente al cual accede una vez autorizado
-      name: 'lista',
-                    this.$router.replace({ name: "lista" });
-                    console.log("The username and password are Correct");
-                } else {
-                    console.log("The username and / or password is incorrect");
-                }
-            } else {
-                console.log("A username and password must be present");
-            }
+    // methods: {
+    //     login() {
+    //         if (this.input.username != "" && this.input.password != "") {
+    //             if (this.input.username == this.mockUsuario.username && this.input.password == this.mockUsuario.password) {
+    //                 this.$emit("authenticated", true);
+    //                 // Indicando el primer componente al cual accede una vez autorizado
+    //   name: 'lista',
+    //                 this.$router.replace({ name: "lista" });
+    //                 console.log("The username and password are Correct");
+    //             } else {
+    //                 console.log("The username and / or password is incorrect");
+    //             }
+    //         } else {
+    //             console.log("A username and password must be present");
+    //         }
 
-        }
-    }
+    //     }
+    // }
 }
 </script>
