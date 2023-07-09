@@ -22,12 +22,20 @@
           </li>
           <li class="nav-item">
             <!-- <router-link class="btn btn-outline-primary" v-if="!authenticated" to="/signup">Registrarse</router-link> -->
-            <router-link class="btn btn-outline-primary" to="/signup">Registrarse</router-link>
+            <router-link class="btn btn-outline-primary" to="/registration">Registrarse</router-link>           
+            <!-- <router-link class="btn btn-outline-primary" to="/registration">Registrarse</router-link> -->
           </li>
           <li class="nav-item">
             <!-- <router-link class="btn btn-outline-primary" to="/carrito">carrito</router-link> -->                    
             <!-- <a href="/carrito" ><i class="bi bi-cart bi-size"></i></a> -->
+            <!--  -->
             <router-link class="btn btn-outline-primary" to="/carrito"><i class="bi bi-cart bi-size"></i></router-link>                    
+            <!-- <router-link class="btn btn-outline-primary" to="/carrito">
+              <b-button v-b-toggle.sidebar-cart class="nav-btn">
+                 <b-icon icon="cart" class="bi bi-cart bi-size"></b-icon> 
+                 <i class="bi bi-cart bi-size"></i>
+            </b-button>
+           </router-link> -->
           </li>          
         </ul>
       </div>
