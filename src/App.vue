@@ -1,21 +1,34 @@
 <template>
   <div id="app">
-    <NavbarComponent/>
-    <HeaderBar />
+    <h1>App.vue</h1>
+    <!-- <button @click="openModal">Abrir Modal</button> -->
+    <NavbarComponent/>    
+    <!-- <HeaderBar /> -->
     <router-view />
   </div>
 </template>
 
 <script>
-import HeaderBar from './components/HeaderBar.vue'
+// import HeaderBar from './components/HeaderBar.vue'
 import NavbarComponent from './components/NavbarComponent.vue'
 
 export default {
   name: 'App',
+  // data() {
+  //   return {
+  //     showModal: false
+  //   };
+  // },
   components: {
-    HeaderBar,
+    // HeaderBar,
     NavbarComponent
-  }
+  },
+//  methods: {
+//     openModal() {
+//       this.showModal = true
+//       console.log(`modal: ${this.showModal}`);
+//     }
+//   }
 }
 </script>
 

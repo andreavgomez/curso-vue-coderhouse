@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div>    
+    <!-- <dialog v-if="verModal" @click="closeModal"> -->
     <p>Soy el carrito</p>
     <h1>Carrito de compra</h1>
     <table align="center">
@@ -59,6 +60,8 @@
       </tfoot>
     </table>
     <button class="confirm-btn" style="">PAGAR</button>
+    <!-- <button @click="closeModal">Cerrar</button> -->
+  <!-- </dialog> -->
   </div>
 </template>
 
@@ -67,12 +70,19 @@
 <script>
 export default {
   name: "CarritoComponent",
+  // data() {
+  //     return {
+  //      verModal:showModal,
+  //      };
+  //   },  
   props: {
     carrito: {
       type: Array,
       required: true,
     },
+    // showModal: Boolean,
   },
+  emits: ['close-modal'],
   methods: {
     incrementar(libro) {
       console.log("incrementar libro")
@@ -103,6 +113,9 @@ export default {
       console.log(nuevoCarrito)      
       this.$emit("update:carrito", nuevoCarrito); // Emitir evento para actualizar la propiedad carrito en el componente padre
     },
+    // closeModal() {
+    //   this.$emit('close-modal')
+    // }   
   },
   computed: {
     total() {

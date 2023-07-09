@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div>    
+    <!-- <li><router-link :to="{name: 'NavbarComponent', params: {carrito: carrito} }">Carrito desde homePge</router-link></li>     -->
     <!-- <p>Soy home page</p> -->
     <div class="row">
       <div class="col" v-for="libro in libros" :key="libro.id">
@@ -23,17 +24,23 @@
         </div>
       </div>
     </div>
-    <CarritoComponent :carrito="carrito" />
+    <!-- <CarritoComponent showModal=true  /> -->
+    <CarritoComponent :carrito="carrito"  />
+    <!-- <NavbarComponent  :carrito="carrito"/> -->
+    <!-- <CarritoComponent /> -->
   </div>
 </template>
 
 <script>
+// import NavbarComponentVue from '@/components/NavbarComponent.vue';
 import CarritoComponent from "../components/CarritoComponent.vue";
+// import NavbarComponent from "../components/NavbarComponent.vue";
 
 export default {
   name: "HomePage",
   components: {
     CarritoComponent,
+    // NavbarComponent
   },
   data() {
     return {
@@ -62,7 +69,8 @@ export default {
       // Si NO está en el carrito, hacer el push
       if (!enCarrito) {
         this.carrito.push(libro);
-        this.$emit("agregarAlCarrito", libro);
+        // this.$emit("agregarAlCarrito", libro);
+        // this.$emit("agregarAlCarrito", this.carrito);
         // Y si ya está en el carrito modificar cantidad y subtotal
       } else {
         console.log(`El libro ya existe en el carrito`);

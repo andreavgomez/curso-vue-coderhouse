@@ -47,7 +47,13 @@
 
   export default  {
     name: 'NavbarComponent', 
-    props: [],
+    props:['carrito'],
+    // props: {
+    // carrito: {
+    //   type: Array,
+    //   required: true,
+    // },
+    // },
     data () {
       return {
          authenticated: true,

@@ -4,13 +4,13 @@
             <h3>Ingresar</h3>
 
             <div class="form-group">
-                <label>Email {{ variable }}</label>
-                <input type="email" v-model="input.username" class="form-control form-control-lg" />
+                <label>Usuario {{ variable }}</label>
+                <input type="text" v-model="input.usr" class="form-control form-control-lg" />
             </div>
 
             <div class="form-group">
                 <label>Contraseña</label>
-                <input type="password" v-model="input.password" class="form-control form-control-lg" />
+                <input type="password" v-model="input.pass" class="form-control form-control-lg" />
             </div>
 
             <button type="button" @click="login" class="btn btn-dark btn-lg btn-block">Ingresar</button>
@@ -37,32 +37,36 @@ export default {
     data() {
         return {
             input: {
-                username: "",
-                password: ""
+                usr: "",
+                pass: ""
             }, mockUsuario: {
-                username: "usuario@com.ar",
-                password: "password"
+                usr: "usuario1",
+                pass: "123"
             },
             variable:"valor"
         }
     },
-    // methods: {
-    //     login() {
-    //         if (this.input.username != "" && this.input.password != "") {
-    //             if (this.input.username == this.mockUsuario.username && this.input.password == this.mockUsuario.password) {
-    //                 this.$emit("authenticated", true);
-    //                 // Indicando el primer componente al cual accede una vez autorizado
-    //   name: 'lista',
-    //                 this.$router.replace({ name: "lista" });
-    //                 console.log("The username and password are Correct");
-    //             } else {
-    //                 console.log("The username and / or password is incorrect");
-    //             }
-    //         } else {
-    //             console.log("A username and password must be present");
-    //         }
+    methods: {
+        login() {
+            if (this.input.usr != "" && this.input.pass != "") {
+                if (this.input.usr == this.mockUsuario.usr && this.input.pass == this.mockUsuario.pass) {
+                    this.$emit("authenticated", true);
+                    // Indicando el primer componente al cual accede una vez autorizado
+                     console.log("Tu usuario y pass es correcto");
+                     <p><h3>"Tu usuario y pass es correcto"</h3></p>                     
+                    this.$router.replace({ name: "home" });                
+                } else {
+                    console.log("Tu usuario y pass es incorrecto");
+                    console.log(`this.input.usr: ${this.input.usr} this.mockUsuario.usr: ${this.mockUsuario.usr}`);                    
+                    console.log(`this.input.pass: ${this.input.pass} this.mockUsuario.pass: ${this.mockUsuario.pass}`);                                        
+                    <p><h3>"Tu usuario y pass es incorrecto"</h3></p>
+                }
+            } else {
+                console.log("A username and password must be present");
+            }
 
-    //     }
-    // }
+        }
+      
+    }
 }
 </script>
