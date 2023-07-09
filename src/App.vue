@@ -1,6 +1,5 @@
 <template>
-  <div id="app">
-    <h1>App.vue</h1>
+  <div id="app">    
     <!-- <button @click="openModal">Abrir Modal</button> -->
     <NavbarComponent/>    
     <!-- <HeaderBar /> -->
