@@ -74,11 +74,12 @@ export default {
 .home-component {
   margin: 120px auto; /* Agrega margen superior e inferior y deja margen izquierdo y derecho automático */
   max-width: 1200px; /* Establece un ancho máximo para el componente */
+  padding: 20px;
 }
 
 .card {
   width: 18rem;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .card-img-top {
