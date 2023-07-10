@@ -1,43 +1,40 @@
 <template>
-  <div id="app">    
-    <!-- <button @click="openModal">Abrir Modal</button> -->
-    <NavbarComponent/>    
-    <!-- <HeaderBar /> -->
+  <div id="app">
+    <!-- <NavbarComponent :carrito="carrito" @open-modal="openModal" /> -->
+    <NavbarComponent :carrito="carrito" @open-modal="handleOpenModal" />
+    <CarritoComponent :carrito="carrito" :show-modal="showModal" @close-modal="closeModal" />
     <router-view />
   </div>
 </template>
 
 <script>
-// import HeaderBar from './components/HeaderBar.vue'
-import NavbarComponent from './components/NavbarComponent.vue'
+import CarritoComponent from './components/CarritoComponent.vue';
+import NavbarComponent from './components/NavbarComponent.vue';
 
 export default {
   name: 'App',
-  // data() {
-  //   return {
-  //     showModal: false
-  //   };
-  // },
-  components: {
-    // HeaderBar,
-    NavbarComponent
+  data() {
+    return {
+      carrito: [],
+      showModal: false,
+    };
   },
-//  methods: {
-//     openModal() {
-//       this.showModal = true
-//       console.log(`modal: ${this.showModal}`);
-//     }
-//   }
-}
+  methods: {
+    openModal() {
+      this.showModal = true;
+      console.log(this.showModal)
+    },    
+    closeModal() {
+      this.showModal = false;
+      console.log(this.showModal)
+    },
+    handleOpenModal() {
+      this.showModal = true;
+    },    
+  },
+  components: {
+    CarritoComponent,
+    NavbarComponent,
+  },
+};
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>

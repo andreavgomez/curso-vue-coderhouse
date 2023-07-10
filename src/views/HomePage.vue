@@ -19,7 +19,8 @@
         </div>
       </div>
     </div>
-    <CarritoComponent :carrito="carrito" />
+    <!-- <CarritoComponent :carrito="carrito" :showModal="showModal" /> -->
+    <CarritoComponent :carrito="carrito" :showModal="showModal" @open-modal="openModal" @close-modal="closeModal" />
   </div>
 </template>
 
@@ -36,12 +37,21 @@ export default {
       loading: false,
       libros: [],
       carrito: [],
+      showModal: false,
     };
   },
   created() {
     this.getLibros();
   },
   methods: {
+    openModal() {
+      this.showModal = true;
+      console.log(this.showModal);
+    },
+    closeModal() {
+      this.showModal = false;
+      console.log(this.showModal);
+    },    
     findById(id) {
       return this.carrito.find((item) => item.id === id);
     },
