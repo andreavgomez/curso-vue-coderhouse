@@ -13,6 +13,9 @@
             </router-link>
           </li>
           <li class="nav-item">
+            <router-link class="nav-link" to="/productos">Productos</router-link>
+          </li>
+          <li class="nav-item">
             <router-link class="btn btn-outline-danger" to="/about" v-on:click.native="logout()">
               Salir
             </router-link>
