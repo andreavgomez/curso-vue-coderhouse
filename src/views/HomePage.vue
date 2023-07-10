@@ -1,16 +1,11 @@
 <template>
-  <div>    
-    <!-- <li><router-link :to="{name: 'NavbarComponent', params: {carrito: carrito} }">Carrito desde homePge</router-link></li>     -->
-    <!-- <p>Soy home page</p> -->
+  <div class="home-component">
     <div class="row">
       <div class="col" v-for="libro in libros" :key="libro.id">
-        <div :id="libro.id" class="card" style="width: 18rem">
-          <img
-            class="card-img-top img-fluid"
-            style="height: 200px"
-            src="../assets/libroNuevo.jpg"
-            :alt="libro.titulo"
-          />
+        <div :id="libro.id" class="card">
+          <img class="card-img-top img-fluid" :src="require(`@/assets/${libro.imagen}`)" :alt="libro.titulo" style="height: 200px" />
+          <!-- <img class="card-img-top img-fluid" :src="require('@/assets/libroNuevo.jpg')" :alt="libro.titulo" style="height: 200px" /> -->
+          <!-- <img class="card-img-top img-fluid" :src="libro.imagen" :alt="libro.titulo" style="height: 200px" /> -->
           <!-- <img class="card-img-top img-fluid" style="height: 200px;" :src="libro.imagen" :alt="libro.titulo">           -->
           <!-- <img class="card-img-top img-fluid" style="height: 200px;" src={{libro.imagen}} :alt="libro.titulo">           -->
           <div class="card-body">
@@ -24,28 +19,21 @@
         </div>
       </div>
     </div>
-    <!-- <CarritoComponent showModal=true  /> -->
-    <CarritoComponent :carrito="carrito"  />
-    <!-- <NavbarComponent  :carrito="carrito"/> -->
-    <!-- <CarritoComponent /> -->
+    <CarritoComponent :carrito="carrito" />
   </div>
 </template>
 
 <script>
-// import NavbarComponentVue from '@/components/NavbarComponent.vue';
 import CarritoComponent from "../components/CarritoComponent.vue";
-// import NavbarComponent from "../components/NavbarComponent.vue";
 
 export default {
   name: "HomePage",
   components: {
     CarritoComponent,
-    // NavbarComponent
   },
   data() {
     return {
       loading: false,
-      //   users: [],
       libros: [],
       carrito: [],
     };
@@ -59,24 +47,15 @@ export default {
     },
     agregarAlCarrito(libro) {
       libro.cantidad = 1;
-      // this.carrito.push(libro);
-      console.log(`agregar al carrito`);
-      // this.$emit("agregarAlCarrito", libro);
 
-      // Buscar el producto en el carrito:
       const enCarrito = this.findById(libro.id);
 
-      // Si NO está en el carrito, hacer el push
       if (!enCarrito) {
         this.carrito.push(libro);
-        // this.$emit("agregarAlCarrito", libro);
-        // this.$emit("agregarAlCarrito", this.carrito);
-        // Y si ya está en el carrito modificar cantidad y subtotal
       } else {
         console.log(`El libro ya existe en el carrito`);
         alert("El libro ya existe en el carrito");
       }
-
     },
     getLibros() {
       this.loading = true;
@@ -90,3 +69,37 @@ export default {
   },
 };
 </script>
+
+<style>
+.home-component {
+  margin: 120px auto 0; /* Agrega un margen superior de 100px */
+}
+
+.card {
+  width: 18rem;
+  margin-bottom: 20px;
+}
+
+.card-img-top {
+  height: 200px;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card-title {
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+
+.card-body p {
+  margin-bottom: 5px;
+}
+
+.btn-primary {
+  margin-top: 10px;
+}
+</style>
