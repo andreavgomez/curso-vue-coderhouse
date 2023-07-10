@@ -26,6 +26,8 @@
           <li><a href="#"><i class="bi bi-watch"></i></a></li>
         </ul>
       </div>
+
+      <p v-if="error" class="error-message"><strong>{{ error }}</strong></p>      
     </form>
   </div>
 </template>
@@ -43,25 +45,46 @@ export default {
         usr: "usuario1",
         pass: "123"
       },
-      variable: "valor"
+      variable: "valor",
+      error: "" // Variable para almacenar el mensaje de error
     }
   },
   methods: {
     login() {
-      if (this.input.usr != "" && this.input.pass != "") {
-        if (this.input.usr == this.mockUsuario.usr && this.input.pass == this.mockUsuario.pass) {
-          this.$emit("authenticated", true);
-          console.log("Tu usuario y contraseña son correctos");
-          this.$router.replace({ name: "home" });
-        } else {
-          console.log("Tu usuario o contraseña son incorrectos");
-          console.log(`this.input.usr: ${this.input.usr}, this.mockUsuario.usr: ${this.mockUsuario.usr}`);
-          console.log(`this.input.pass: ${this.input.pass}, this.mockUsuario.pass: ${this.mockUsuario.pass}`);
-        }
-      } else {
+    if (this.input.usr != "" && this.input.pass != "") {
+        fetch("https://649e5806245f077f3e9c4bc1.mockapi.io/usuarios")
+        .then((res) => res.json())
+        .then((usuarios) => {
+            const usuarioEncontrado = usuarios.find((usuario) => usuario.usr === this.input.usr && usuario.pass === this.input.pass);
+            if (usuarioEncontrado) {
+            this.$emit("authenticated", true);
+            console.log("Tu usuario y contraseña son correctos");
+            this.$router.replace({ name: "home" });
+            } else {
+            console.log("Tu usuario o contraseña son incorrectos");
+            this.error = "Usuario o contraseña incorrectos";
+            }
+        });
+    } else {
         console.log("Se deben proporcionar un nombre de usuario y contraseña");
-      }
+        this.error = "Debes proporcionar un nombre de usuario y una contraseña";
     }
+    }
+    // login() {
+    //   if (this.input.usr != "" && this.input.pass != "") {
+    //     if (this.input.usr == this.mockUsuario.usr && this.input.pass == this.mockUsuario.pass) {
+    //       this.$emit("authenticated", true);
+    //       console.log("Tu usuario y contraseña son correctos");
+    //       this.$router.replace({ name: "home" });
+    //     } else {
+    //       console.log("Tu usuario o contraseña son incorrectos");
+    //       console.log(`this.input.usr: ${this.input.usr}, this.mockUsuario.usr: ${this.mockUsuario.usr}`);
+    //       console.log(`this.input.pass: ${this.input.pass}, this.mockUsuario.pass: ${this.mockUsuario.pass}`);
+    //     }
+    //   } else {
+    //     console.log("Se deben proporcionar un nombre de usuario y contraseña");
+    //   }
+    // }
   }
 }
 </script>
@@ -127,5 +150,11 @@ export default {
 .social-icons a {
   color: #000;
   font-size: 24px;
+}
+
+.error-message {
+  color: red;
+  font-size: 18px;
+  margin-top: 10px;
 }
 </style>
