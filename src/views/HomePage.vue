@@ -70,9 +70,10 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .home-component {
-  margin: 120px auto 0; /* Agrega un margen superior de 100px */
+  margin: 120px auto; /* Agrega margen superior e inferior y deja margen izquierdo y derecho automático */
+  max-width: 1200px; /* Establece un ancho máximo para el componente */
 }
 
 .card {

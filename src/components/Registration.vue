@@ -70,7 +70,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .registration-component {
   max-width: 400px;
   margin: 100px auto 0; /* Agrega un margen superior de 100px */
