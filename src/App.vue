@@ -1,8 +1,10 @@
 <template>
   <div id="app">
     <!-- <NavbarComponent :carrito="carrito" @open-modal="openModal" /> -->
-    <NavbarComponent :carrito="carrito" @open-modal="handleOpenModal" />
-    <CarritoComponent :carrito="carrito" :show-modal="showModal" @close-modal="closeModal" />
+    <!-- <NavbarComponent :carrito="carrito" @open-modal="handleOpenModal" /> -->
+    <NavbarComponent />
+    <!-- <CarritoComponent :carrito="carrito" :show-modal="showModal" @close-modal="closeModal" /> -->
+    <CarritoComponent />
     <router-view />
   </div>
 </template>
@@ -15,22 +17,22 @@ export default {
   name: 'App',
   data() {
     return {
-      carrito: [],
-      showModal: false,
+      // carrito: [],
+      // showModal: false,
     };
   },
   methods: {
-    openModal() {
-      this.showModal = true;
-      console.log(this.showModal)
-    },    
-    closeModal() {
-      this.showModal = false;
-      console.log(this.showModal)
-    },
-    handleOpenModal() {
-      this.showModal = true;
-    },    
+    // openModal() {
+    //   this.showModal = true;
+    //   console.log(this.showModal)
+    // },    
+    // closeModal() {
+    //   this.showModal = false;
+    //   console.log(this.showModal)
+    // },
+    // handleOpenModal() {
+    //   this.showModal = true;
+    // },    
   },
   components: {
     CarritoComponent,

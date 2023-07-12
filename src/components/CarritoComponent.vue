@@ -1,6 +1,7 @@
 <template>
-  <div>
-    <p>Estoy en el carrito</p>{{showModal}}
+  <!--
+    <p>Estoy en el carrito</p>
+    {{ showModal }}
     <div class="overlay" v-if="show" @click="closeModal"></div>
     <div class="modal" v-if="show">
       <div class="modal-header">
@@ -69,75 +70,181 @@
         <button class="confirm-btn" style="">PAGAR</button>
       </div>
     </div>
+    -->
+
+  <div
+    class="modal fade"
+    id="exampleModal"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <!-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> -->
+          <h1>Carrito de compra</h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          carrito: {{ storeState.carrito }}
+
+          <p v-if="storeState.carrito.length === 0">El carrito está vacío.</p>
+          <table align="center" v-else>
+            <thead>
+              <tr>
+                <th>Producto</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th>Total</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="libro in storeState.carrito" :key="libro.id">
+                <td>{{ libro.titulo }}</td>
+                <td>$ {{ libro.precio }}</td>
+                <td class="qty-col">
+                  <div class="flex-space">
+                    <button
+                      class="button-small mr-05 ml-05"
+                      style="cursor: pointer"
+                      @click="decrementar(libro)"
+                    >
+                      <i class="bi bi-dash-square"></i>
+                    </button>
+                    <span>{{ libro.cantidad }}</span>
+                    <button
+                      class="button-small ml-05"
+                      style="cursor: pointer"
+                      @click="incrementar(libro)"
+                    >
+                      <i class="bi bi-plus-square"></i>
+                    </button>
+                  </div>
+                </td>
+                <td class="total-col">$ {{ libroTotal(libro) }}</td>
+                <td class="trash-btn">
+                  <button
+                    class="button-small ml-05"
+                    style="cursor: pointer"
+                    @click="eliminarLibro(libro)"
+                  >
+                    <i class="bi bi-trash"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td>Total:</td>
+                <td></td>
+                <td></td>
+                <td>$ {{ total }}</td>
+                <td></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button class="confirm-btn" style="">PAGAR</button>
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import store from "../store";
+
 export default {
   name: "CarritoComponent",
-  // data() {
-  // return {
-  //   showModal: false,
-  //  };
-  // },
+  data() {
+    return {
+      // showModal: false,
+      storeState: store.state,
+    };
+  },
   props: {
-    carrito: {
-      type: Array,
-      required: true,
-    },
-    showModal: {
-      type: Boolean,
-      required: true,
-    },    
+    // carrito: {
+    //   type: Array,
+    //   required: true,
+    // },
+    // showModal: {
+    //   type: Boolean,
+    //   required: true,
+    // },
   },
   computed: {
-    show() {
-      return this.showModal;
-    },
+    // show() {
+    //   return this.showModal;
+    // },
     total() {
-      if (this.carrito) {
-        return this.carrito.reduce(
+      if (this.storeState.carrito) {
+        return this.storeState.carrito.reduce(
           (total, libro) => total + libro.precio * libro.cantidad,
           0
         );
       } else {
         return 0;
       }
-    },    
+    },
   },
   methods: {
     incrementar(libro) {
       console.log("incrementar libro");
-      const libroEnCarrito = this.carrito.find((l) => l.id === libro.id);
-      console.log(libroEnCarrito);
-      console.log(libroEnCarrito.cantidad);
-      if (libroEnCarrito) {
-        this.$set(libroEnCarrito, "cantidad", libroEnCarrito.cantidad + 1);
-      }
-      console.log(libroEnCarrito.cantidad);
+      store.incrementQ(libro);
+      
+      // const libroEnCarrito = this.storeState.carrito.find((l) => l.id === libro.id);
+      
+      // console.log(libroEnCarrito);
+      // console.log(libroEnCarrito.cantidad);
+
+      // if (libroEnCarrito) {
+      //   // this.$set(libroEnCarrito, "cantidad", libroEnCarrito.cantidad + 1);
+
+      // }
+      // console.log(libroEnCarrito.cantidad);
     },
     decrementar(libro) {
       console.log("decrementar libro");
-      const libroEnCarrito = this.carrito.find((l) => l.id === libro.id);
-      console.log(libroEnCarrito);
-      console.log(libroEnCarrito.cantidad);
-      if (libroEnCarrito && libroEnCarrito.cantidad > 1) {
-        this.$set(libroEnCarrito, "cantidad", libroEnCarrito.cantidad - 1);
-        console.log(libroEnCarrito.cantidad);
-      }
+      store.decrementQ(libro);
+
+      // const libroEnCarrito = this.storeState.carrito.find((l) => l.id === libro.id);
+      // console.log(libroEnCarrito);
+      // console.log(libroEnCarrito.cantidad);
+      
+      // if (libroEnCarrito && libroEnCarrito.cantidad > 1) {
+      //   this.$set(libroEnCarrito, "cantidad", libroEnCarrito.cantidad - 1);
+      //   console.log(libroEnCarrito.cantidad);
+      // }
     },
     libroTotal(libro) {
       return libro.precio * libro.cantidad;
     },
     eliminarLibro(libro) {
       console.log("eliminar libro");
-      const nuevoCarrito = this.carrito.filter((l) => l.id !== libro.id);
-      console.log(nuevoCarrito);
-      this.$emit("update:carrito", nuevoCarrito);
+      store.eliminar(libro);
+
+      // const nuevoCarrito = this.storeState.carrito.filter((l) => l.id !== libro.id);
+      // console.log(nuevoCarrito);
+      // this.$emit("update:carrito", nuevoCarrito);
     },
-    closeModal() {
-      this.$emit("close-modal");
-    },
+    // closeModal() {
+    //   this.$emit("close-modal");
+    // },
   },
   // computed: {
   //   total() {

@@ -26,7 +26,13 @@
             </router-link>
           </li>
           <li class="nav-item">
+            <!--
             <button class="btn btn-outline-primary" @click="openModal">
+              <i class="bi bi-cart bi-size"></i>
+            </button>
+            -->
+            
+            <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
               <i class="bi bi-cart bi-size"></i>
             </button>
           </li>
@@ -54,10 +60,10 @@ export default {
       console.log("logout");
       this.$emit("logout");
     },
-    openModal() {
-      this.$emit("open-modal");
-      console.log('Evento open-modal emitido')
-    },
+    // openModal() {
+    //   this.$emit("open-modal");
+    //   console.log('Evento open-modal emitido')
+    // },
   }
 };
 </script>

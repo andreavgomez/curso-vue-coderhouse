@@ -3,7 +3,12 @@
     <div class="row">
       <div class="col" v-for="libro in libros" :key="libro.id">
         <div :id="libro.id" class="card">
-          <img class="card-img-top img-fluid" :src="require(`@/assets/${libro.imagen}`)" :alt="libro.titulo" style="height: 200px" />
+          <img
+            class="card-img-top img-fluid"
+            :src="require(`@/assets/${libro.imagen}`)"
+            :alt="libro.titulo"
+            style="height: 200px"
+          />
           <!-- <img class="card-img-top img-fluid" :src="require('@/assets/libroNuevo.jpg')" :alt="libro.titulo" style="height: 200px" /> -->
           <!-- <img class="card-img-top img-fluid" :src="libro.imagen" :alt="libro.titulo" style="height: 200px" /> -->
           <!-- <img class="card-img-top img-fluid" style="height: 200px;" :src="libro.imagen" :alt="libro.titulo">           -->
@@ -19,25 +24,33 @@
         </div>
       </div>
     </div>
-    <!-- <CarritoComponent :carrito="carrito" :showModal="showModal" /> -->
-    <CarritoComponent :carrito="carrito" :showModal="showModal" @open-modal="openModal" @close-modal="closeModal" />
+    <!-- <CarritoComponent :carrito="carrito" :showModal="showModal" /> 
+    <CarritoComponent
+      :carrito="carrito"
+      :showModal="showModal"
+      @open-modal="openModal"
+      @close-modal="closeModal"
+    />
+    -->
   </div>
 </template>
 
 <script>
-import CarritoComponent from "../components/CarritoComponent.vue";
+// import CarritoComponent from "../components/CarritoComponent.vue";
+import store from "../store.js";
 
 export default {
   name: "HomePage",
   components: {
-    CarritoComponent,
+    // CarritoComponent,
   },
   data() {
     return {
       loading: false,
       libros: [],
-      carrito: [],
+      // carrito: [],
       showModal: false,
+      storeState: store.state,
     };
   },
   created() {
@@ -51,9 +64,9 @@ export default {
     closeModal() {
       this.showModal = false;
       console.log(this.showModal);
-    },    
+    },
     findById(id) {
-      return this.carrito.find((item) => item.id === id);
+      return this.storeState.carrito.find((item) => item.id === id);
     },
     agregarAlCarrito(libro) {
       libro.cantidad = 1;
@@ -61,7 +74,7 @@ export default {
       const enCarrito = this.findById(libro.id);
 
       if (!enCarrito) {
-        this.carrito.push(libro);
+        this.storeState.carrito.push(libro);
       } else {
         console.log(`El libro ya existe en el carrito`);
         alert("El libro ya existe en el carrito");
@@ -69,12 +82,78 @@ export default {
     },
     getLibros() {
       this.loading = true;
-      fetch("https://649e5806245f077f3e9c4bc1.mockapi.io/libros")
-        .then((res) => res.json())
-        .then((libros) => {
-          this.libros = libros;
-          this.loading = false;
-        });
+      // fetch("https://649e5806245f077f3e9c4bc1.mockapi.io/libros")
+      //   .then((res) => res.json())
+      //   .then((libros) => {
+      //     this.libros = libros;
+      //     this.loading = false;
+      //   });
+      this.libros = [
+        {
+          autor: "Jorge Luis Borges",
+          titulo: "Aleph",
+          precio: 900,
+          imagen: "AlephBorges.jpg",
+          id: "1",
+        },
+        {
+          autor: "Gabriel García Marquez",
+          titulo: "Cien años de Soledad",
+          precio: 4500,
+          imagen: "CienSoledadMarquez.jpg",
+          id: "2",
+        },
+        {
+          autor: "Isabel Allende",
+          titulo: "Paula",
+          precio: 2800,
+          imagen: "PaulaAllende.jpg",
+          id: "3",
+        },
+        {
+          autor: "Jorge Luis Borges",
+          titulo: "Ficciones",
+          precio: 1400,
+          imagen: "FiccionesBorges.jpg",
+          id: "4",
+        },
+        {
+          autor: "Mario Benedetti",
+          titulo: "Andamios",
+          precio: 2200,
+          imagen: "AndamiosBenedetti.jpg",
+          id: "5",
+        },
+        {
+          autor: "Mario Vargas Llosa",
+          titulo: "La ciudad y los perros",
+          precio: 2000,
+          imagen: "CiudadPerrosVargasLlosa.jpg",
+          id: "6",
+        },
+        {
+          autor: "Ronnie Wolff",
+          titulo: "Aprender JS",
+          precio: 3400,
+          imagen: "libroNuevo.jpg",
+          id: "7",
+        },
+        {
+          autor: "Felix Blanco",
+          titulo: "Aprender Vue js",
+          precio: 5300,
+          imagen: "libroNuevo.jpg",
+          id: "8",
+        },
+        {
+          autor: "Neal Veum",
+          titulo: "Aprender html",
+          precio: 2300,
+          imagen: "libroNuevo.jpg",
+          id: "9",
+        },
+      ];
+      this.loading = false;
     },
   },
 };
