@@ -60,10 +60,6 @@ export default {
       console.log("logout");
       this.$emit("logout");
     },
-    // openModal() {
-    //   this.$emit("open-modal");
-    //   console.log('Evento open-modal emitido')
-    // },
   }
 };
 </script>

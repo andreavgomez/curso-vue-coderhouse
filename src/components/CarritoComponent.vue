@@ -1,165 +1,58 @@
 <template>
-  <!--
-    <p>Estoy en el carrito</p>
-    {{ showModal }}
-    <div class="overlay" v-if="show" @click="closeModal"></div>
-    <div class="modal" v-if="show">
-      <div class="modal-header">
-        <h1>Carrito de compra</h1>
-        <button class="close-btn" @click="closeModal">&times;</button>
-      </div>
-      <div class="modal-body">
-        <p>Soy el carrito</p>
-        <h1>Carrito de compra</h1>
-        <p v-if="carrito.length === 0">El carrito está vacío.</p>
-        <table align="center" v-else>
-          <thead>
-            <tr>
-              <th>Producto</th>
-              <th>Precio</th>
-              <th>Cantidad</th>
-              <th>Total</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="libro in carrito" :key="libro.id">
-              <td>{{ libro.titulo }}</td>
-              <td>$ {{ libro.precio }}</td>
-              <td class="qty-col">
-                <div class="flex-space">
-                  <button
-                    class="button-small mr-05 ml-05"
-                    style="cursor: pointer"
-                    @click="decrementar(libro)"
-                  >
-                    <i class="bi bi-dash-square"></i>
-                  </button>
-                  <span>{{ libro.cantidad }}</span>
-                  <button
-                    class="button-small ml-05"
-                    style="cursor: pointer"
-                    @click="incrementar(libro)"
-                  >
-                    <i class="bi bi-plus-square"></i>
-                  </button>
-                </div>
-              </td>
-              <td class="total-col">$ {{ libroTotal(libro) }}</td>
-              <td class="trash-btn">
-                <button
-                  class="button-small ml-05"
-                  style="cursor: pointer"
-                  @click="eliminarLibro(libro)"
-                >
-                  <i class="bi bi-trash"></i>
-                </button>
-              </td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr>
-              <td>Total:</td>
-              <td></td>
-              <td></td>
-              <td>$ {{ total }}</td>
-              <td></td>
-            </tr>
-          </tfoot>
-        </table>
-        <button class="confirm-btn" style="">PAGAR</button>
-      </div>
-    </div>
-    -->
-
-  <div
-    class="modal fade"
-    id="exampleModal"
-    tabindex="-1"
-    aria-labelledby="exampleModalLabel"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog">
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <!-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> -->
-          <h1>Carrito de compra</h1>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
+          <h1 class="modal-title text-primary">Carrito de compra</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          carrito: {{ storeState.carrito }}
-
           <p v-if="storeState.carrito.length === 0">El carrito está vacío.</p>
-          <table align="center" v-else>
-            <thead>
-              <tr>
-                <th>Producto</th>
-                <th>Precio</th>
-                <th>Cantidad</th>
-                <th>Total</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="libro in storeState.carrito" :key="libro.id">
-                <td>{{ libro.titulo }}</td>
-                <td>$ {{ libro.precio }}</td>
-                <td class="qty-col">
-                  <div class="flex-space">
-                    <button
-                      class="button-small mr-05 ml-05"
-                      style="cursor: pointer"
-                      @click="decrementar(libro)"
-                    >
-                      <i class="bi bi-dash-square"></i>
+          <div v-else>
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th class="title-col">Producto</th>
+                  <th class="title-col">Precio</th>
+                  <th class="title-col">Cantidad</th>
+                  <th class="title-col">Total</th>
+                  <th class="title-col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="(libro, index) in storeState.carrito" :key="libro.id" :class="index % 2 === 0 ? 'even-row' : 'odd-row'">
+                  <td>{{ libro.titulo }}</td>
+                  <td>$ {{ libro.precio }}</td>
+                  <td>
+                    <div class="input-group">
+                      <button class="btn btn-outline-primary" @click="decrementar(libro)">
+                        <i class="bi bi-dash"></i>
+                      </button>
+                      <input type="number" class="form-control" v-model.number="libro.cantidad" min="1" max="99" />
+                      <button class="btn btn-outline-primary" @click="incrementar(libro)">
+                        <i class="bi bi-plus"></i>
+                      </button>
+                    </div>
+                  </td>
+                  <td>$ {{ libroTotal(libro) }}</td>
+                  <td>
+                    <button class="btn btn-danger" @click="eliminarLibro(libro)">
+                      <i class="bi bi-trash"></i>
                     </button>
-                    <span>{{ libro.cantidad }}</span>
-                    <button
-                      class="button-small ml-05"
-                      style="cursor: pointer"
-                      @click="incrementar(libro)"
-                    >
-                      <i class="bi bi-plus-square"></i>
-                    </button>
-                  </div>
-                </td>
-                <td class="total-col">$ {{ libroTotal(libro) }}</td>
-                <td class="trash-btn">
-                  <button
-                    class="button-small ml-05"
-                    style="cursor: pointer"
-                    @click="eliminarLibro(libro)"
-                  >
-                    <i class="bi bi-trash"></i>
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-            <tfoot>
-              <tr>
-                <td>Total:</td>
-                <td></td>
-                <td></td>
-                <td>$ {{ total }}</td>
-                <td></td>
-              </tr>
-            </tfoot>
-          </table>
-        </div>
-        <div class="modal-footer">
-          <button class="confirm-btn" style="">PAGAR</button>
-          <button
-            type="button"
-            class="btn btn-secondary"
-            data-bs-dismiss="modal"
-          >
-            Close
-          </button>
+                  </td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="3" class="text-end">Total:</td>
+                  <td colspan="2">$ {{ total }}</td>
+                </tr>
+              </tfoot>
+            </table>
+            <div class="text-center">
+              <button class="btn btn-primary confirm-btn">PAGAR</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -262,92 +155,53 @@ export default {
 </script>
 
 <style scoped>
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 9999;
-}
-
-.modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  z-index: 10000;
-  max-width: 90%;
-  max-height: 90%;
-  overflow: auto;
+.modal-content {
+  border: none;
+  border-radius: 0;
 }
 
 .modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1em;
-}
-
-.modal-header h1 {
-  margin: 0;
-}
-
-.close-btn {
-  border: none;
-  background-color: transparent;
-  font-size: 1.5rem;
-  cursor: pointer;
+  justify-content: center;
 }
 
 .modal-body {
-  /* Estilos del cuerpo del modal */
+  padding: 0;
 }
 
-.modal-body p {
-  margin-bottom: 1em;
+.table {
+  margin-bottom: 0;
 }
 
-table {
+.table th,
+.table td {
+  vertical-align: middle;
+}
+
+.table-striped tbody tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+.table-striped tbody tr:nth-child(odd) {
+  background-color: #fff;
+}
+
+.title-col {
+  background-color: var(--bs-primary);
+  color: #fff;
+}
+
+.input-group {
   width: 100%;
-  margin-bottom: 1em;
 }
 
-th,
-td {
-  text-align: left;
-  padding: 0.5em;
-}
-
-th {
-  background-color: #f2f2f2;
-}
-
-.total-col {
-  font-weight: bold;
-}
-
-.trash-btn {
-  text-align: center;
+.input-group .btn {
+  width: 3rem;
+  margin: 0 0.5rem;
 }
 
 .confirm-btn {
-  display: block;
-  margin-top: 1em;
-  padding: 0.5em 1em;
-  background-color: #2c23aa;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.confirm-btn:hover {
-  background-color: #1d1874;
+  margin-top: 1rem;
+  background-color: var(--bs-primary);
+  color: #fff;
 }
 </style>

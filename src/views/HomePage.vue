@@ -82,77 +82,77 @@ export default {
     },
     getLibros() {
       this.loading = true;
-      // fetch("https://649e5806245f077f3e9c4bc1.mockapi.io/libros")
-      //   .then((res) => res.json())
-      //   .then((libros) => {
-      //     this.libros = libros;
-      //     this.loading = false;
-      //   });
-      this.libros = [
-        {
-          autor: "Jorge Luis Borges",
-          titulo: "Aleph",
-          precio: 900,
-          imagen: "AlephBorges.jpg",
-          id: "1",
-        },
-        {
-          autor: "Gabriel García Marquez",
-          titulo: "Cien años de Soledad",
-          precio: 4500,
-          imagen: "CienSoledadMarquez.jpg",
-          id: "2",
-        },
-        {
-          autor: "Isabel Allende",
-          titulo: "Paula",
-          precio: 2800,
-          imagen: "PaulaAllende.jpg",
-          id: "3",
-        },
-        {
-          autor: "Jorge Luis Borges",
-          titulo: "Ficciones",
-          precio: 1400,
-          imagen: "FiccionesBorges.jpg",
-          id: "4",
-        },
-        {
-          autor: "Mario Benedetti",
-          titulo: "Andamios",
-          precio: 2200,
-          imagen: "AndamiosBenedetti.jpg",
-          id: "5",
-        },
-        {
-          autor: "Mario Vargas Llosa",
-          titulo: "La ciudad y los perros",
-          precio: 2000,
-          imagen: "CiudadPerrosVargasLlosa.jpg",
-          id: "6",
-        },
-        {
-          autor: "Ronnie Wolff",
-          titulo: "Aprender JS",
-          precio: 3400,
-          imagen: "libroNuevo.jpg",
-          id: "7",
-        },
-        {
-          autor: "Felix Blanco",
-          titulo: "Aprender Vue js",
-          precio: 5300,
-          imagen: "libroNuevo.jpg",
-          id: "8",
-        },
-        {
-          autor: "Neal Veum",
-          titulo: "Aprender html",
-          precio: 2300,
-          imagen: "libroNuevo.jpg",
-          id: "9",
-        },
-      ];
+      fetch("https://649e5806245f077f3e9c4bc1.mockapi.io/libros")
+        .then((res) => res.json())
+        .then((libros) => {
+          this.libros = libros;
+          this.loading = false;
+        });
+      // this.libros = [
+      //   {
+      //     autor: "Jorge Luis Borges",
+      //     titulo: "Aleph",
+      //     precio: 900,
+      //     imagen: "AlephBorges.jpg",
+      //     id: "1",
+      //   },
+      //   {
+      //     autor: "Gabriel García Marquez",
+      //     titulo: "Cien años de Soledad",
+      //     precio: 4500,
+      //     imagen: "CienSoledadMarquez.jpg",
+      //     id: "2",
+      //   },
+      //   {
+      //     autor: "Isabel Allende",
+      //     titulo: "Paula",
+      //     precio: 2800,
+      //     imagen: "PaulaAllende.jpg",
+      //     id: "3",
+      //   },
+      //   {
+      //     autor: "Jorge Luis Borges",
+      //     titulo: "Ficciones",
+      //     precio: 1400,
+      //     imagen: "FiccionesBorges.jpg",
+      //     id: "4",
+      //   },
+      //   {
+      //     autor: "Mario Benedetti",
+      //     titulo: "Andamios",
+      //     precio: 2200,
+      //     imagen: "AndamiosBenedetti.jpg",
+      //     id: "5",
+      //   },
+      //   {
+      //     autor: "Mario Vargas Llosa",
+      //     titulo: "La ciudad y los perros",
+      //     precio: 2000,
+      //     imagen: "CiudadPerrosVargasLlosa.jpg",
+      //     id: "6",
+      //   },
+      //   {
+      //     autor: "Ronnie Wolff",
+      //     titulo: "Aprender JS",
+      //     precio: 3400,
+      //     imagen: "libroNuevo.jpg",
+      //     id: "7",
+      //   },
+      //   {
+      //     autor: "Felix Blanco",
+      //     titulo: "Aprender Vue js",
+      //     precio: 5300,
+      //     imagen: "libroNuevo.jpg",
+      //     id: "8",
+      //   },
+      //   {
+      //     autor: "Neal Veum",
+      //     titulo: "Aprender html",
+      //     precio: 2300,
+      //     imagen: "libroNuevo.jpg",
+      //     id: "9",
+      //   },
+      // ];
       this.loading = false;
     },
   },
@@ -192,5 +192,10 @@ export default {
 
 .btn-primary {
   margin-top: 10px;
+}
+
+.custom-background {
+  background-color: #6a6a6a;
+  /* Agrega aquí otros estilos personalizados para el fondo */
 }
 </style>
