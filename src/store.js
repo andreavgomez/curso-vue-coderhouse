@@ -1,6 +1,7 @@
 const store = {
     state: {
       carrito: [],
+      currentUser: null
     },
     incrementQ(libro) {
       this.state.carrito.forEach((l) => {

@@ -5,15 +5,29 @@
 
       <div class="form-group">
         <label>Usuario {{ variable }}</label>
-        <input type="text" v-model="input.usr" class="form-control form-control-lg" />
+        <input
+          type="text"
+          v-model="input.usr"
+          class="form-control form-control-lg"
+        />
       </div>
 
       <div class="form-group">
         <label>Contraseña</label>
-        <input type="password" v-model="input.pass" class="form-control form-control-lg" />
+        <input
+          type="password"
+          v-model="input.pass"
+          class="form-control form-control-lg"
+        />
       </div>
 
-      <button type="button" @click="login" class="btn btn-dark btn-lg btn-block">Ingresar</button>
+      <button
+        type="button"
+        @click="login"
+        class="btn btn-dark btn-lg btn-block"
+      >
+        Ingresar
+      </button>
 
       <p class="forgot-password text-right mt-2 mb-4">
         <router-link to="/forgot-password">¿Olvidó su contraseña?</router-link>
@@ -21,72 +35,99 @@
 
       <div class="social-icons">
         <ul>
-          <li><a href="#"><i class="bi bi-facebook"></i></a></li>
-          <li><a href="#"><i class="bi bi-clipboard"></i></a></li>
-          <li><a href="#"><i class="bi bi-watch"></i></a></li>
+          <li>
+            <a href="#"><i class="bi bi-facebook"></i></a>
+          </li>
+          <li>
+            <a href="#"><i class="bi bi-clipboard"></i></a>
+          </li>
+          <li>
+            <a href="#"><i class="bi bi-watch"></i></a>
+          </li>
         </ul>
       </div>
 
-      <p v-if="error" class="error-message"><strong>{{ error }}</strong></p>      
+      <p v-if="error" class="error-message">
+        <strong>{{ error }}</strong>
+      </p>
     </form>
   </div>
 </template>
 
 <script>
+import store from "../store";
+
 export default {
   name: "LoginComponent",
   data() {
     return {
+      storeState: store.state,
       input: {
         usr: "",
-        pass: ""
+        pass: "",
       },
       mockUsuario: {
         usr: "usuario1",
-        pass: "123"
+        pass: "123",
       },
       variable: "valor",
-      error: "" // Variable para almacenar el mensaje de error
-    }
+      error: "", // Variable para almacenar el mensaje de error
+    };
   },
   methods: {
     login() {
-    if (this.input.usr != "" && this.input.pass != "") {
+      if (this.input.usr != "" && this.input.pass != "") {
         fetch("https://649e5806245f077f3e9c4bc1.mockapi.io/usuarios")
-        .then((res) => res.json())
-        .then((usuarios) => {
-            const usuarioEncontrado = usuarios.find((usuario) => usuario.usr === this.input.usr && usuario.pass === this.input.pass);
+          .then((res) => res.json())
+          .then((usuarios) => {
+            const usuarioEncontrado = usuarios.find(
+              (usuario) =>
+                usuario.usr === this.input.usr &&
+                usuario.pass === this.input.pass
+            );
             if (usuarioEncontrado) {
-            this.$emit("authenticated", true);
-            console.log("Tu usuario y contraseña son correctos");
-            this.$router.replace({ name: "home" });
+              this.$emit("authenticated", true);
+              console.log("Tu usuario y contraseña son correctos");
+
+              // Guardar el usuario conectado en el estado currentUser
+              this.storeState.currentUser = usuarioEncontrado;
+
+              this.$router.replace({ name: "home" });
             } else {
-            console.log("Tu usuario o contraseña son incorrectos");
-            this.error = "Usuario o contraseña incorrectos";
+              console.log("Tu usuario o contraseña son incorrectos");
+              this.error = "Usuario o contraseña incorrectos";
             }
-        });
-    } else {
+          });
+      } else {
         console.log("Se deben proporcionar un nombre de usuario y contraseña");
         this.error = "Debes proporcionar un nombre de usuario y una contraseña";
-    }
-    }
-    // login() {
-    //   if (this.input.usr != "" && this.input.pass != "") {
-    //     if (this.input.usr == this.mockUsuario.usr && this.input.pass == this.mockUsuario.pass) {
-    //       this.$emit("authenticated", true);
-    //       console.log("Tu usuario y contraseña son correctos");
-    //       this.$router.replace({ name: "home" });
-    //     } else {
-    //       console.log("Tu usuario o contraseña son incorrectos");
-    //       console.log(`this.input.usr: ${this.input.usr}, this.mockUsuario.usr: ${this.mockUsuario.usr}`);
-    //       console.log(`this.input.pass: ${this.input.pass}, this.mockUsuario.pass: ${this.mockUsuario.pass}`);
-    //     }
-    //   } else {
-    //     console.log("Se deben proporcionar un nombre de usuario y contraseña");
-    //   }
-    // }
-  }
-}
+      }
+    },
+  },
+
+  // methods: {
+  //   login() {
+  //   if (this.input.usr != "" && this.input.pass != "") {
+  //       fetch("https://649e5806245f077f3e9c4bc1.mockapi.io/usuarios")
+  //       .then((res) => res.json())
+  //       .then((usuarios) => {
+  //           const usuarioEncontrado = usuarios.find((usuario) => usuario.usr === this.input.usr && usuario.pass === this.input.pass);
+  //           if (usuarioEncontrado) {
+  //           this.$emit("authenticated", true);
+  //           console.log("Tu usuario y contraseña son correctos");
+  //           this.$router.replace({ name: "home" });
+  //           } else {
+  //           console.log("Tu usuario o contraseña son incorrectos");
+  //           this.error = "Usuario o contraseña incorrectos";
+  //           }
+  //       });
+  //   } else {
+  //       console.log("Se deben proporcionar un nombre de usuario y contraseña");
+  //       this.error = "Debes proporcionar un nombre de usuario y una contraseña";
+  //   }
+  //   }
+  // }
+};
 </script>
 
 <style scoped>
