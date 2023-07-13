@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
   "name": "curso-vuejs-coderhouse",
+=======
+  "name": "pre-entrega-2",
+>>>>>>> 9971a3b24163a9c43e446ff2566f0f7bbdef207b
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -8,10 +12,18 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+<<<<<<< HEAD
     "bootstrap": "^4.5.3",
     "bootstrap-vue": "^2.23.1",
     "core-js": "^3.8.3",
     "vue": "^2.6.14"
+=======
+    "bootstrap": "^5.3.0",
+    "bootstrap-icons": "^1.10.5",
+    "core-js": "^3.8.3",
+    "vue": "^2.6.14",
+    "vue-router": "^3.6.5"
+>>>>>>> 9971a3b24163a9c43e446ff2566f0f7bbdef207b
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

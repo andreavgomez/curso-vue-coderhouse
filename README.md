@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ## Primer entrega
 
 ### Objetivos Generales:
@@ -18,10 +19,35 @@ B. Debes definir la lógica y la estructura de la presentación de los datos en 
 
 ## Para ejecutar proyecto
 
+=======
+# pre-entrega-2
+
+## Project setup
+>>>>>>> 9971a3b24163a9c43e446ff2566f0f7bbdef207b
 ```
 npm install
 ```
 
+<<<<<<< HEAD
 ```
 npm run serve
 ```
+=======
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
+
+### Compiles and minifies for production
+```
+npm run build
+```
+
+### Lints and fixes files
+```
+npm run lint
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
+>>>>>>> 9971a3b24163a9c43e446ff2566f0f7bbdef207b
