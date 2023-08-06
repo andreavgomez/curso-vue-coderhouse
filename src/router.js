@@ -17,8 +17,8 @@ const routes = [
   { path: "/productos/nuevo", component: NuevoProducto, name: "nuevo-producto" },
   { path: "/productos/editar/:id", component: EditarProducto, name: "editar-producto" },
   { path: "/productos/eliminar/:id", component: EliminarProducto, name: "eliminar-producto" },
-  { path: "/login", component: LoginComponent ,name: "LoginComponent"},  
-  { path: "/Registration", component: RegistrationComponent ,name: "RegistrationComponent"},      
+  { path: "/login", component: LoginComponent, name: "LoginComponent" },
+  { path: "/Registration", component: RegistrationComponent, name: "RegistrationComponent" },
 ];
 
 const router = new VueRouter({

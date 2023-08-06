@@ -40,6 +40,7 @@
           v-model="nuevoProducto.imagen"
           class="form-control"
           required
+          placeholder="libroNuevo.jpg"
         />
       </div>
       <button type="submit" class="btn btn-primary">Guardar Producto</button>

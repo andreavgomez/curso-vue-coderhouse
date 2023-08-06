@@ -60,10 +60,6 @@ export default {
     },
   },
   methods: {
-    setAuthenticated(status) {
-      console.log("setting de authenticated status > ", status);
-      // this.authenticated = status;
-    },
     logout() {
       console.log("logout");
       this.$store.dispatch("usuario/setCurrentUserAction", null);

@@ -36,8 +36,8 @@
 </template>
 
 <script>
-import { mapGetters} from 'vuex';
-import Swal from "sweetalert2"; // Importa SweetAlert
+import { mapGetters } from "vuex";
+import Swal from "sweetalert2";
 
 export default {
   name: "HomePage",
@@ -47,20 +47,14 @@ export default {
       showModal: false,
     };
   },
-  // created() {
-  //   this.isLoading = true;
-  //   this.$store.dispatch('carrito/getLibrosAction').then(this.isLoading = false);
-
-  // },
-
   created() {
     this.isLoading = true;
-    this.$store.dispatch('carrito/getLibrosAction').then(() => {
+    this.$store.dispatch("carrito/getLibrosAction").then(() => {
       this.isLoading = false; // Establecer isLoading a false cuando la promesa se resuelva
     });
   },
-  computed:{
-    ...mapGetters('carrito',["getLibros", "loading"]),
+  computed: {
+    ...mapGetters("carrito", ["getLibros", "loading"]),
   },
   methods: {
     openModal() {
@@ -80,14 +74,15 @@ export default {
       const enCarrito = this.findById(libro.id);
 
       if (!enCarrito) {
-        this.$store.dispatch('carrito/agregarACarritoAction',libro);
-        // Agregar el SweetAlert cuando se agrega un libro al carrito
+        this.$store.dispatch("carrito/agregarACarritoAction", libro);
+        // Agregar el SweetAlert cuando se agrega un libro al carrito        
         Swal.fire({
           icon: "success",
           title: "Producto agregado al carrito",
           text: `El libro "${libro.titulo}" ha sido agregado al carrito.`,
           confirmButtonText: "OK",
-        });        
+          confirmButtonColor: "#007bff",
+        });
       } else {
         console.log(`El libro ya existe en el carrito`);
         Swal.fire({
@@ -95,6 +90,7 @@ export default {
           title: "El Producto ya existe en el carrito",
           text: `El libro "${libro.titulo}" ya se encuentra en el carrito.`,
           confirmButtonText: "OK",
+          confirmButtonColor: "#007bff",
         });
       }
     },
@@ -104,8 +100,8 @@ export default {
 
 <style scoped>
 .home-component {
-  margin: 120px auto; /* Agrega margen superior e inferior y deja margen izquierdo y derecho automático */
-  max-width: 1200px; /* Establece un ancho máximo para el componente */
+  margin: 120px auto;
+  max-width: 1200px;
   padding: 20px;
 }
 
@@ -141,9 +137,7 @@ export default {
   background-color: #6a6a6a;
 }
 
-/* Estilos para centrar el spinner de carga */
 .spinner-border {
   margin-top: 50px;
 }
-
 </style>

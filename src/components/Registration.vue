@@ -55,7 +55,6 @@
 </template>
 
 <script>
-// import { mapGetters} from "vuex";
 import Swal from "sweetalert2";
 
 export default {
@@ -78,7 +77,6 @@ export default {
         .dispatch("usuario/crearUsuarioAction", this.newUsuario)
         .then(() => {
           this.sent = true;
-          // this.$router.push("/");
           this.$router.replace({ name: "home" });
         })
         .catch((error) => {
@@ -97,7 +95,7 @@ export default {
 <style scoped>
 .registration-component {
   max-width: 400px;
-  margin: 100px auto 0; /* Agrega un margen superior de 100px */
+  margin: 100px auto 0;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 4px;

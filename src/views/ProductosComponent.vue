@@ -2,7 +2,8 @@
   <div class="productos-component container">
     <h1>Productos</h1>
     <router-link to="/productos/nuevo" class="btn btn-primary mb-3"
-      >Nuevo Producto</router-link>
+      >Nuevo Producto</router-link
+    >
     <a @click="volverAlInicio" class="volver-link">Volver al Inicio</a>
     <table class="table">
       <thead>
@@ -37,7 +38,6 @@
 </template>
 
 <script>
-// import { mapGetters} from 'vuex';
 import { mapGetters, mapActions, mapMutations } from "vuex";
 
 export default {
@@ -47,12 +47,6 @@ export default {
       libros: [],
     };
   },
-  // created() {
-  //   // this.getLibros();
-  //   this.loading = true;
-  //   // this.ibros = this.$store.getters["carrito/getLibros"];
-  //    this.$store.dispatch('carrito/getLibrosAction').then(this.loading = false);
-  // },
   created() {
     this.isLoading = true;
     this.getLibrosAction().then(() => {
@@ -60,19 +54,15 @@ export default {
     });
   },
   computed: {
-    // ...mapGetters("carrito", ["getLibros"]),
     ...mapGetters("carrito", ["getLibros", "loading"]),
   },
   methods: {
     ...mapActions("carrito", ["getLibrosAction"]),
     ...mapMutations("carrito", ["eliminarLibroMutation"]),
     volverAlInicio() {
-      // Puedes realizar alguna acción adicional aquí si es necesario
-      // Redirige al inicio utilizando el router de Vue (si lo estás usando)
-      this.$router.push('/');
-      // O simplemente redirige utilizando window.location.href
-      // window.location.href = '/';
-    },    
+      // Redirige al inicio utilizando el router de Vue
+      this.$router.push("/");
+    },
   },
 };
 </script>
@@ -99,5 +89,4 @@ th {
 .volver-link {
   padding: 10px 20px;
 }
-
 </style>

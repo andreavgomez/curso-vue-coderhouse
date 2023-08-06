@@ -55,7 +55,7 @@ export const carritoModule = {
     },
     vaciarCarritoMutation: (state) => {
       state.carrito = [];
-    },    
+    },
   },
   actions: {
     incrementAction: (context, libro) => {
@@ -135,7 +135,7 @@ export const carritoModule = {
     },
     vaciarCarritoAction: (context) => {
       context.commit('vaciarCarritoMutation');
-    },    
+    },
   },
   getters: {
     getCarrito: (state) => {

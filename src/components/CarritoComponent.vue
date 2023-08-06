@@ -1,10 +1,21 @@
 <template>
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div
+    class="modal fade"
+    id="exampleModal"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
     <div class="modal-dialog modal-dialog-centered modal-lg">
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title text-primary">Carrito de compra</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
         </div>
         <div class="modal-body">
           <p v-if="getCarritoLength === 0">El carrito está vacío.</p>
@@ -20,25 +31,38 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="(libro, index) in getCarrito" :key="libro.id" :class="index % 2 === 0 ? 'even-row' : 'odd-row'">
+                <tr
+                  v-for="(libro, index) in getCarrito"
+                  :key="libro.id"
+                  :class="index % 2 === 0 ? 'even-row' : 'odd-row'"
+                >
                   <td>{{ libro.titulo }}</td>
                   <td>$ {{ libro.precio }}</td>
                   <td>
                     <div class="input-group">
-                      <button class="btn btn-outline-primary" @click="decrementar(libro)">
+                      <button
+                        class="btn btn-outline-primary"
+                        @click="decrementar(libro)"
+                      >
                         <i class="bi bi-dash"></i>
-                      </button>                      
-                       <button class="btn btn-outline-primary">
-                         {{libro.cantidad}}
-                       </button>    
-                      <button class="btn btn-outline-primary" @click="incrementar(libro)">
+                      </button>
+                      <button class="btn btn-outline-primary">
+                        {{ libro.cantidad }}
+                      </button>
+                      <button
+                        class="btn btn-outline-primary"
+                        @click="incrementar(libro)"
+                      >
                         <i class="bi bi-plus"></i>
                       </button>
                     </div>
                   </td>
                   <td>$ {{ libroTotal(libro) }}</td>
                   <td>
-                    <button class="btn btn-danger" @click="eliminarLibro(libro)">
+                    <button
+                      class="btn btn-danger"
+                      @click="eliminarLibro(libro)"
+                    >
                       <i class="bi bi-trash"></i>
                     </button>
                   </td>
@@ -52,7 +76,12 @@
               </tfoot>
             </table>
             <div class="text-center">
-              <button class="btn btn-primary confirm-btn" @click="mostrarConfirmacionPago">PAGAR</button>
+              <button
+                class="btn btn-primary confirm-btn"
+                @click="mostrarConfirmacionPago"
+              >
+                PAGAR
+              </button>
             </div>
           </div>
         </div>
@@ -62,7 +91,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import { mapGetters, mapActions } from "vuex";
 import Swal from "sweetalert2"; // Importa SweetAlert
 
 export default {
@@ -71,7 +100,11 @@ export default {
     return {};
   },
   computed: {
-    ...mapGetters('carrito',["getCarrito", "getCarritoLength","getLibroTotal"]),
+    ...mapGetters("carrito", [
+      "getCarrito",
+      "getCarritoLength",
+      "getLibroTotal",
+    ]),
   },
   methods: {
     incrementar(libro) {
@@ -84,9 +117,13 @@ export default {
       return libro.precio * libro.cantidad;
     },
     eliminarLibro(libro) {
-      this.$store.dispatch("carrito/eliminarAction", libro);      
+      this.$store.dispatch("carrito/eliminarAction", libro);
     },
-    ...mapActions('carrito', ['incrementAction', 'decrementAction', 'eliminarAction']),
+    ...mapActions("carrito", [
+      "incrementAction",
+      "decrementAction",
+      "eliminarAction",
+    ]),
 
     mostrarConfirmacionPago() {
       // Muestra SweetAlert con el mensaje de confirmación de compra
@@ -117,7 +154,7 @@ export default {
           });
         }
       });
-    },    
+    },
   },
 };
 </script>

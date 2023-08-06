@@ -9,6 +9,7 @@
           type="text"
           v-model="input.usr"
           class="form-control form-control-lg"
+          placeholder="admin" 
         />
       </div>
 
@@ -18,6 +19,7 @@
           type="password"
           v-model="input.pass"
           class="form-control form-control-lg"
+          placeholder="123"
         />
       </div>
 
@@ -55,25 +57,17 @@
 </template>
 
 <script>
-// import store from "../store";
-// import { mapGetters, mapActions } from 'vuex';
-// import { mapGetters} from 'vuex';
 import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "LoginComponent",
   data() {
     return {
-      // storeState: store.state,
       input: {
         usr: "",
         pass: "",
       },
-      mockUsuario: {
-        usr: "usuario1",
-        pass: "123",
-      },
-      error: "", // Variable para almacenar el mensaje de error
+      error: "",
     };
   },
   computed: {
@@ -83,27 +77,24 @@ export default {
     ...mapActions("usuario", ["obtenerUsuarios", "setCurrentUserAction"]),
     async login() {
       try {
-        // Lógica para obtener las credenciales del usuario desde el formulario
-        // ...
-
         if (this.input.usr !== "" && this.input.pass !== "") {
-          // Llama a la acción obtenerUsuarios para cargar los datos de los usuarios desde la API
+          // Llamo a la acción obtenerUsuarios para cargar los datos de los usuarios desde la API
           await this.obtenerUsuarios();
 
-          // Realiza la lógica para verificar el inicio de sesión, comparando las credenciales ingresadas con los usuarios almacenados en el estado de Vuex
+          // Realizo la lógica para verificar el inicio de sesión, comparando las credenciales ingresadas con los usuarios almacenados en el estado de Vuex
           const usuarioValido = this.$store.state.usuario.usuarios.find(
             (usuario) =>
               usuario.usr === this.input.usr && usuario.pass === this.input.pass
           );
 
           if (usuarioValido) {
-            // Inicio de sesión exitoso, puedes redirigir o realizar cualquier acción adicional
+            // Inicio de sesión exitoso
             console.log("Inicio de sesión exitoso");
 
-            // Agregar la propiedad isAdmin al usuario encontrado
+            // Agrego la propiedad isAdmin al usuario encontrado
             usuarioValido.isAdmin = usuarioValido.isAdmin || false;
 
-            // Llamar a la acción setCurrentUserAction para establecer el usuario conectado en el estado
+            // Llamo a la acción setCurrentUserAction para establecer el usuario conectado en el estado
             this.setCurrentUserAction(usuarioValido);
 
             this.$router.replace({ name: "home" });
@@ -124,67 +115,6 @@ export default {
         console.error("Error al iniciar sesión:", error);
       }
     },
-    login2() {
-      if (this.input.usr != "" && this.input.pass != "") {
-        // fetch("https://649e5806245f077f3e9c4bc1.mockapi.io/usuarios")
-        // .then((res) => res.json())
-        // .then((usuarios) => {
-        const usuarios = [
-          {
-            nombre: "usuario 1",
-            email: "usuario1@gmail.com",
-            usr: "usuario1",
-            pass: "123",
-            isAdmin: false,
-            id: "1",
-          },
-          {
-            nombre: "Administrador",
-            email: "admin@gmail.com",
-            usr: "admin",
-            pass: "123",
-            isAdmin: true,
-            id: "2",
-          },
-          {
-            nombre: "usuario2",
-            email: "usuario2@gmail.com",
-            usr: "usuario2",
-            pass: "123",
-            isAdmin: false,
-            id: "3",
-          },
-        ];
-        const usuarioEncontrado = usuarios.find(
-          (usuario) =>
-            usuario.usr === this.input.usr && usuario.pass === this.input.pass
-        );
-
-        if (usuarioEncontrado) {
-          this.$emit("authenticated", true);
-          console.log("Tu usuario y contraseña son correctos");
-
-          // Guardar el usuario conectado en el estado currentUser
-          // this.storeState.currentUser = usuarioEncontrado;
-          // this.$store.dispatch("usuario/setCurrentUserAction", usuarioEncontrado);
-          this.$store.dispatch("usuario/setCurrentUserAction", {
-            ...usuarioEncontrado,
-            isAdmin: usuarioEncontrado.isAdmin,
-          });
-          // console.log( this.storeState.currentUser);
-          // setCurrentUserAction(context, usuarioEncontrado)
-
-          this.$router.replace({ name: "home" });
-        } else {
-          console.log("Tu usuario o contraseña son incorrectos");
-          this.error = "Usuario o contraseña incorrectos";
-        }
-        //});
-      } else {
-        console.log("Se deben proporcionar un nombre de usuario y contraseña");
-        this.error = "Debes proporcionar un nombre de usuario y una contraseña";
-      }
-    },
   },
 };
 </script>
@@ -192,7 +122,7 @@ export default {
 <style scoped>
 .login-component {
   max-width: 400px;
-  margin: 100px auto 0; /* Agrega un margen superior de 100px */
+  margin: 100px auto 0;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 4px;
